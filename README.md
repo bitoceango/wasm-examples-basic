@@ -12,6 +12,13 @@ WebAssembly front
 * c
 * Assemblyscript
 
+本项目需要你对WebAssembly与WASI有基本的了解
+
+[webassembly](http://webassembly.org.cn/docs/js/)
+
+[WASI](https://github.com/WebAssembly/WASI)
+
+
 为了比较尺度一致，所以想通过不同的front和不同的end去实现相同的功能
 
 # exmaple 说明
