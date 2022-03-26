@@ -11,6 +11,7 @@
 - [C to webassembly module and embedded to nodejs](#c-to-webassembly-module-and-embedded-to-nodejs)
 - [C to WebAssembly module and embedded to wasmedge-go](#c-to-webassembly-module-and-embedded-to-wasmedge-go)
 - [C to webassembly module and embedded to browser](#c-to-webassembly-module-and-embedded-to-browser)
+- [Assemblyscript to WebAssembly module and embedded to node](#assemblyscript-to-webassembly-module-and-embedded-to-node)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -32,7 +33,9 @@
 * host runtime重定向标准输出到某个文件，然后打印文件里面的信息
 
 # Rust to WebAssembly module and embedded to wasmtime-go
-安装cargo-wasi
+
+**安装cargo-wasi**
+
 ```
 cargo install cargo-wasi
 ```
@@ -43,20 +46,20 @@ cd rust-wasm
 
 cargo wasi build
 ```
-安装wabt
+**安装wabt**
 
 ```
 https://github.com/WebAssembly/wabt
 ```
 
-wasm to wat
+**wasm to wat**
 
 这不不是必须的，只是为了看wasm 文本格式，默认情况runtime是加载.wasm
 ```
 wasm2wat target/wasm32-wasi/debug/hello_world.wasm -o target/wasm32-wasi/debug/hello_world.wat --generate-names
 ```
 
-run
+**run**
 
 ```
 cp target/wasm32-wasi/debug/hello_world.wat ../wasmtime-go/hello.wat
@@ -66,7 +69,7 @@ cd wasmtime-go
 go run main.go
 
 ```
-结果输出
+**结果输出**
 
 ```
 param is :1060192
@@ -76,13 +79,14 @@ Hello World,i am rust, get content from from wasmtime-go
 
 #  Rust to WebAssembly module and embedded to nodejs
 
-拷贝wasm到node
+**拷贝wasm到node**
+
 ```
 cp ../rust-wasm/target/wasm32-wasi/debug/hello_world.wasm ./hello.wasm
 
 node --experimental-wasi-unstable-preview1 hello.js
 ```
-输出结果
+**输出结果**
 
 ```
 param is:1067776
@@ -92,14 +96,14 @@ Hello World,i am rust, get content from nodejs
 
 #  Rust to WebAssembly module and embedded to wasmedge-go
 
-安装wasmedge
+**安装wasmedge**
 
 ```
 curl -sSf https://raw.githubusercontent.com/WasmEdge/WasmEdge/master/utils/install.sh | bash
 
 ```
 
-启动wasmedge-docker,注意wasmedge-go目前还不支持Mac Arm
+**启动wasmedge-docker,注意wasmedge-go目前还不支持Mac Arm**
 
 ```
 docker pull wasmedge/appdev_aarch64:0.9.1
@@ -109,7 +113,7 @@ docker run  -v $(pwd):/app -it wasmedge/appdev_aarch64:0.9.1
 
 ```
 
-执行
+**run**
 
 ```
 cd wasmedge-go
@@ -122,7 +126,7 @@ go run main.go hello_world.wasm
 
 ```
 
-输出结果
+**输出结果**
 
 ```
 param is :1061184
@@ -133,21 +137,21 @@ Hello World,i am rust, get content from wasmedge-go
 
 #  Rust to WebAssembly module and embedded to browser
 
-安装web-pack
+**安装web-pack**
 
 ```
 cargo install wasm-pack
 
 ```
 
-初始化项目
+**初始化项目**
 
 ```
 cargo new --lib hello-wasm
 
 ```
 
-build and push 
+**build and push**
 
 ```
 wasm-pack build --scope mynpmusername
@@ -157,7 +161,7 @@ cd pkg
 npm publish --access=public (注意此处需要先登录npm)
 
 ```
-在web引入rust npm 包
+**在web引入rust npm 包**
 
 创建package.json
 
@@ -177,7 +181,7 @@ npm publish --access=public (注意此处需要先登录npm)
 }
 
 ```
-创建 webpack.config.js
+**创建 webpack.config.js**
 
 ```
 const path = require('path');
@@ -192,7 +196,7 @@ module.exports = {
 
 ```
 
-创建一个index.html
+**创建一个index.html**
 
 ```
 <!DOCTYPE html>
@@ -208,7 +212,7 @@ module.exports = {
 
 ```
 
-从HTML文件中引用index.js
+**从HTML文件中引用index.js**
 
 ```
 const js = import("./node_modules/@yournpmusername/hello-wasm/hello_wasm.js");
@@ -218,7 +222,7 @@ js.then(js => {
 
 ```
 
-run
+**run**
 
 ```
 npm install
@@ -231,7 +235,7 @@ npm run serve
 
 # C to webassembly module and embedded to wasmtime-go
 
-安装llvm
+**安装llvm**
 
 ```
 brew install llvm ;export PATH=/usr/local/opt/llvm/bin:$PATH
@@ -244,7 +248,7 @@ llc --version
     wasm64     - WebAssembly 64-bit
 ...
 ```
-安装wasi-libc
+**安装wasi-libc**
 
 ```
 git clone https://github.com/CraneStation/wasi-libc.git
@@ -254,7 +258,7 @@ cd wasi-libc
 make install INSTALL_DIR=/tmp/wasi-libc
 ```
 
-生成libclang_rt.builtins-wasm32.a
+**生成libclang_rt.builtins-wasm32.a**
 
 https://github.com/WebAssembly/wasi-sdk
 
@@ -265,7 +269,7 @@ cp lib/clang/13.0.0/lib/wasi/libclang_rt.builtins-wasm32.a /usr/local/Cellar/llv
 //在mac下wasi-sdk默认放在/opt/wasi-opt/ 下面，其他wasm runtime在使用到wasi 的时候会默认去这个目录下去找
 ```
 
-编译生成wasm 
+**编译生成wasm**
 
 ```
 https://wasdk.github.io/WasmFiddle/,你可以直接在上面的网站上把你的c代码编译成wasm，检查你的语法已成查看你的wat，但是上面的网站不支持wasi
@@ -276,19 +280,22 @@ wasm2wat hello.wasm -o hello.wat --generate-names
 
 cp hello.wat ../wasmtime-go
 ```
-run
+**run**
 
 ```
 cd wasm-go
 
 go run main.go
 ```
-输出结果
+**输出结果**
+
 ```
 param is :69216
 Hello World,i am c,i get content from wasmtime-go
 ```
 # C to webassembly module and embedded to nodejs
+
+**run**
 
 ```
 cp ../c-wasm/hello.wasm ./
@@ -296,7 +303,7 @@ cp ../c-wasm/hello.wasm ./
 node --experimental-wasi-unstable-preview1 hello.js
 
 ```
-输出结果
+**输出结果**
 
 ```
 param is:69216
@@ -306,7 +313,7 @@ Hello World,i am c,i get content nodejs
 
 #  C to WebAssembly module and embedded to wasmedge-go
 
-执行
+**run**
 
 ```
 cd wasmedge-go
@@ -317,7 +324,7 @@ go run main.go hello.wasm
 
 ```
 
-输出结果
+**输出结果**
 
 ```
 param is :69216
@@ -327,7 +334,7 @@ Hello World,i am c,i get content wasmedge-go
 
 # C to webassembly module and embedded to browser
 
-安装Emscripten SDK
+**安装Emscripten SDK**
 
 ```
 git clone https://github.com/juj/emsdk.git
@@ -349,7 +356,7 @@ Error: No tool or SDK found by name 'sdk-incoming-64bit'
 
 ```
 
-用emcc编译
+**用emcc编译**
 
 ```
 # 注意emsdk的目录
@@ -359,7 +366,7 @@ cp ~/emsdk/emscripten/1.38.15/src/shell_minimal.html html_template
 emcc -o hello.html hello.c -O3 -s WASM=1 -s "EXTRA_EXPORTED_RUNTIME_METHODS=['ccall']" --shell-file html_template/shell_minimal.html
 
 ```
-run
+**run**
 
 ```
 python -m SimpleHTTPServer
@@ -370,7 +377,7 @@ python -m SimpleHTTPServer
 
 # Assemblyscript to WebAssembly module and embedded to node
 
-run 
+**run**
 
 ```
 npm install 
@@ -381,7 +388,7 @@ npm test
 
 ```
 
-输出结果
+**输出结果**
 
 ```
 param is:26000
