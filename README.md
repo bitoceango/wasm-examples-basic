@@ -1,6 +1,11 @@
 # repository description
 本项目是学习WebAssembly过程中做的example，本意是通过学习目前主流的wasm runtime，发现各家的优劣
 
+选择的标准有
+* 最少支持Wasm MVP
+* 支持Wasi
+* host env 支持golang或者nodejs
+
 本项目包含了
 * wasmtime
 * wasmedge
