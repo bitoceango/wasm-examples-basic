@@ -1,19 +1,18 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+# repository description
+本项目是学习WebAssembly过程中做的example，本意是通过学习目前主流的wasm runtime，发现各家的优劣
 
-- [exmaple 说明](#exmaple-%E8%AF%B4%E6%98%8E)
-- [Rust to WebAssembly module and embedded to wasmtime-go](#rust-to-webassembly-module-and-embedded-to-wasmtime-go)
-- [Rust to WebAssembly module and embedded to nodejs](#rust-to-webassembly-module-and-embedded-to-nodejs)
-- [Rust to WebAssembly module and embedded to wasmedge-go](#rust-to-webassembly-module-and-embedded-to-wasmedge-go)
-- [Rust to WebAssembly module and embedded to browser](#rust-to-webassembly-module-and-embedded-to-browser)
-- [C to webassembly module and embedded to wasmtime-go](#c-to-webassembly-module-and-embedded-to-wasmtime-go)
-- [C to webassembly module and embedded to nodejs](#c-to-webassembly-module-and-embedded-to-nodejs)
-- [C to WebAssembly module and embedded to wasmedge-go](#c-to-webassembly-module-and-embedded-to-wasmedge-go)
-- [C to webassembly module and embedded to browser](#c-to-webassembly-module-and-embedded-to-browser)
-- [Assemblyscript to WebAssembly module and embedded to node](#assemblyscript-to-webassembly-module-and-embedded-to-node)
+本项目包含了
+* wasmtime
+* wasmedge
+* nodejs
+* browser
 
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+WebAssembly front
+* rust
+* c
+* Assemblyscript
+
+为了比较尺度一致，所以想通过不同的front和不同的end去实现相同的功能
 
 # exmaple 说明
 本例子包含的webassembly知识点
@@ -31,6 +30,23 @@
 * export-function里面会调用import的host function传递一个memory address给到host runtime，host runtime写一个字符串到memory
 * webassembly 从momory里面读取字符串，并且打印到标准输出
 * host runtime重定向标准输出到某个文件，然后打印文件里面的信息
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [exmaple 说明](#exmaple-%E8%AF%B4%E6%98%8E)
+- [Rust to WebAssembly module and embedded to wasmtime-go](#rust-to-webassembly-module-and-embedded-to-wasmtime-go)
+- [Rust to WebAssembly module and embedded to nodejs](#rust-to-webassembly-module-and-embedded-to-nodejs)
+- [Rust to WebAssembly module and embedded to wasmedge-go](#rust-to-webassembly-module-and-embedded-to-wasmedge-go)
+- [Rust to WebAssembly module and embedded to browser](#rust-to-webassembly-module-and-embedded-to-browser)
+- [C to webassembly module and embedded to wasmtime-go](#c-to-webassembly-module-and-embedded-to-wasmtime-go)
+- [C to webassembly module and embedded to nodejs](#c-to-webassembly-module-and-embedded-to-nodejs)
+- [C to WebAssembly module and embedded to wasmedge-go](#c-to-webassembly-module-and-embedded-to-wasmedge-go)
+- [C to webassembly module and embedded to browser](#c-to-webassembly-module-and-embedded-to-browser)
+- [Assemblyscript to WebAssembly module and embedded to node](#assemblyscript-to-webassembly-module-and-embedded-to-node)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 # Rust to WebAssembly module and embedded to wasmtime-go
 
