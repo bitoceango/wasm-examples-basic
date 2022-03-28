@@ -9,7 +9,7 @@ const wasi = new WASI({
     args: argv,
     env,
     preopens: {
-        '/sandbox': '/Users/xingyuntian/develop/wasm/icn/wasm-example/hello-wasm/wasm-nodejs'
+        '/sandbox': '../'
     }
 });
 
