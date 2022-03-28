@@ -24,7 +24,7 @@ WebAssembly front
 [WASI](https://github.com/WebAssembly/WASI)
 
 
-为了比较尺度一致，所以想通过不同的front和不同的end去实现相同的功能
+为了比较尺度一致，所以想通过不同的frontend和不同的backend去实现相同的功能
 
 # exmaple 说明
 本例子包含的webassembly知识点
