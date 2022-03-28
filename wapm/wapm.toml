@@ -1,0 +1,21 @@
+[package]
+name = "bitocean/first-test"
+version = "1.0.0"
+description = "just a test"
+license = "ISC"
+
+[[module]]
+name = "hello"
+source = "hello.wasm"
+abi = "wasi"
+
+[[module]]
+name = "write_mem"
+source = "write_mem.wasm"
+
+[module.interfaces]
+wasi = "0.1.0-unstable"
+
+[[command]]
+name = "hello"
+module = "hello"
