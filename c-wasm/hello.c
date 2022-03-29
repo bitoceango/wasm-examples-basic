@@ -18,5 +18,4 @@ void print_hello() {
         content[i]=data[i];
   }
   printf("i am c,i get content %s\n", content );
-  
 }
